@@ -22,7 +22,23 @@ export const Navbar: React.FC = () => {
     { name: 'Contato', href: '#contato' },
   ];
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    
+    if (href === '#home') {
+      // Refresh na LP conforme solicitado: volta ao topo e limpa a URL
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        window.location.hash = '';
+      }, 500);
+    } else {
+      const targetId = href.replace('#', '');
+      const elem = document.getElementById(targetId);
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
     setIsOpen(false);
   };
 
@@ -30,7 +46,11 @@ export const Navbar: React.FC = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary py-3 shadow-lg' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <a href="#home" className="flex items-center gap-2 group">
+          <a 
+            href="#home" 
+            onClick={(e) => handleLinkClick(e, '#home')} 
+            className="flex items-center gap-2 group cursor-pointer"
+          >
             <Hammer className="text-primary h-8 w-8 transition-transform group-hover:rotate-12" />
             <span className="text-white font-display font-extrabold text-xl tracking-tight">
               SÃO VITOR <span className="text-primary">LOCAÇÕES</span>
@@ -42,14 +62,16 @@ export const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-white hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider"
+                onClick={(e) => handleLinkClick(e, link.href)}
+                className="text-white hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider cursor-pointer"
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#contato"
-              className="bg-primary hover:bg-orange-600 text-white px-6 py-2 rounded-md font-bold transition-all transform hover:scale-105"
+              onClick={(e) => handleLinkClick(e, '#contato')}
+              className="bg-primary hover:bg-orange-600 text-white px-6 py-2 rounded-md font-bold transition-all transform hover:scale-105 cursor-pointer"
             >
               ORÇAMENTO
             </a>
@@ -78,8 +100,8 @@ export const Navbar: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
-              onClick={handleLinkClick}
-              className="block text-white hover:text-primary hover:bg-gray-800 px-4 py-4 font-medium border-b border-gray-700 last:border-none transition-colors"
+              onClick={(e) => handleLinkClick(e, link.href)}
+              className="block text-white hover:text-primary hover:bg-gray-800 px-4 py-4 font-medium border-b border-gray-700 last:border-none transition-colors cursor-pointer"
             >
               {link.name}
             </a>
@@ -87,8 +109,8 @@ export const Navbar: React.FC = () => {
           <div className="px-4 pt-6">
             <a
               href="#contato"
-              onClick={handleLinkClick}
-              className="block w-full text-center bg-primary text-white py-4 rounded-md font-bold shadow-lg active:scale-95 transition-transform"
+              onClick={(e) => handleLinkClick(e, '#contato')}
+              className="block w-full text-center bg-primary text-white py-4 rounded-md font-bold shadow-lg active:scale-95 transition-transform cursor-pointer"
             >
               SOLICITAR ORÇAMENTO
             </a>

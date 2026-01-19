@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Services } from './components/Services';
@@ -12,48 +12,51 @@ import { Footer } from './components/Footer';
 import { ContactForm } from './components/islands/ContactForm';
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('home');
-
-  // Simple hash-based router simulation for internal sections
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '') || 'home';
-      setActiveTab(hash);
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange();
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    // Garante que ao carregar a página com um hash, o scroll respeite a margem do header
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
   }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-grow">
-        {/* Sections with scroll-mt to account for fixed header height */}
+        {/* Home Section */}
         <section id="home">
           <Hero />
         </section>
         
-        <section id="servicos" className="scroll-mt-20 md:scroll-mt-24">
+        {/* Serviços Section */}
+        <section id="servicos" className="scroll-mt-16 md:scroll-mt-24">
           <Services />
         </section>
 
-        <section id="sobre" className="scroll-mt-20 md:scroll-mt-24">
+        {/* Sobre Nós Section */}
+        <section id="sobre" className="scroll-mt-16 md:scroll-mt-24">
           <About />
         </section>
 
-        <section id="frota" className="scroll-mt-20 md:scroll-mt-24">
+        {/* Frota Section */}
+        <section id="frota" className="scroll-mt-16 md:scroll-mt-24">
           <Fleet />
           <WorkModes />
         </section>
 
-        <section id="depoimentos" className="scroll-mt-20 md:scroll-mt-24">
+        {/* Depoimentos Section */}
+        <section id="depoimentos" className="scroll-mt-16 md:scroll-mt-24">
           <Testimonials />
         </section>
 
-        <section id="contato" className="scroll-mt-20 md:scroll-mt-24">
+        {/* Contato Section */}
+        <section id="contato" className="scroll-mt-16 md:scroll-mt-24">
           <div className="bg-secondary py-20 px-4">
             <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
               <div className="text-white">
