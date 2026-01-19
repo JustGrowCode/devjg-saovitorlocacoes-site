@@ -5,6 +5,28 @@ import { Hammer, Instagram, Linkedin, Facebook, Twitter } from 'lucide-react';
 export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
+  const handleLinkClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    
+    if (id === 'home') {
+      window.location.href = '/';
+    } else {
+      const elem = document.getElementById(id);
+      if (elem) {
+        const offset = 80; // Compensação do header
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elemRect = elem.getBoundingClientRect().top;
+        const elemPosition = elemRect - bodyRect;
+        const offsetPosition = elemPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
   return (
     <footer className="bg-secondary text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,11 +52,11 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-display font-bold text-lg mb-6 text-white uppercase tracking-widest">Navegação</h4>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#home" className="hover:text-primary transition-colors">Home</a></li>
-              <li><a href="#servicos" className="hover:text-primary transition-colors">Serviços</a></li>
-              <li><a href="#frota" className="hover:text-primary transition-colors">Frota</a></li>
-              <li><a href="#sobre" className="hover:text-primary transition-colors">Sobre Nós</a></li>
-              <li><a href="#contato" className="hover:text-primary transition-colors">Contato</a></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'home')} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer p-0 text-left">Home</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'servicos')} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer p-0 text-left">Serviços</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'frota')} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer p-0 text-left">Frota</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'sobre')} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer p-0 text-left">Sobre Nós</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'contato')} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer p-0 text-left">Contato</button></li>
             </ul>
           </div>
 
@@ -46,8 +68,8 @@ export const Footer: React.FC = () => {
                 <span>São Paulo, SP - Região Metropolitana</span>
               </li>
               <li className="flex flex-col">
-                <span className="text-xs text-primary uppercase font-bold">Telefone</span>
-                <span>(11) 99999-9999</span>
+                <span className="text-xs text-primary uppercase font-bold">Telefone / WhatsApp</span>
+                <span>(11) 99680-9510</span>
               </li>
               <li className="flex flex-col">
                 <span className="text-xs text-primary uppercase font-bold">E-mail</span>
@@ -58,7 +80,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-gray-800 pt-10 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-          <p>©{year} São Vitor Locações. Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
+          <p>©{year} São Vitor Locações. Todos os direitos reservados.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-white">Política de Privacidade</a>
             <a href="#" className="hover:text-white">Termos de Uso</a>

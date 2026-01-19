@@ -4,6 +4,8 @@ import { Package, Timer, CheckCircle2 } from 'lucide-react';
 import { FadeIn } from './islands/FadeIn';
 
 export const WorkModes: React.FC = () => {
+  const whatsappLink = "https://wa.me/5511996809510?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20";
+
   return (
     <div className="bg-secondary py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -47,8 +49,13 @@ export const WorkModes: React.FC = () => {
                 </div>
               </div>
               <p className="text-xs font-bold text-primary uppercase tracking-widest mb-6">Ideal para: Projetos completos com prazo definido.</p>
-              <a href="#contato" className="block text-center bg-secondary text-white font-bold py-4 rounded-lg hover:bg-black transition-colors">
-                Contratar Empreita
+              <a 
+                href={`${whatsappLink}Empreita`} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center bg-secondary text-white font-bold py-4 rounded-lg hover:bg-black transition-colors"
+              >
+                Contratar Empreita via WhatsApp
               </a>
             </div>
           </FadeIn>
@@ -81,8 +88,13 @@ export const WorkModes: React.FC = () => {
                 </div>
               </div>
               <p className="text-xs font-bold text-accent uppercase tracking-widest mb-6">Ideal para: Flexibilidade e controle direto da obra.</p>
-              <a href="#contato" className="block text-center bg-accent text-white font-bold py-4 rounded-lg hover:bg-blue-700 transition-colors">
-                Alugar Equipamento
+              <a 
+                href={`${whatsappLink}Locação`}
+                target="_blank"
+                rel="noopener noreferrer" 
+                className="block text-center bg-accent text-white font-bold py-4 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Alugar Equipamento via WhatsApp
               </a>
             </div>
           </FadeIn>

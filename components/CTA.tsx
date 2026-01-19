@@ -3,9 +3,11 @@ import React from 'react';
 import { FadeIn } from './islands/FadeIn';
 
 export const CTA: React.FC = () => {
+  const whatsappLink = "https://wa.me/5511996809510?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento.";
+
   return (
     <div className="relative py-32 px-4 overflow-hidden bg-secondary">
-      {/* Minimalist Gradient Background - Replacing the image with a solid gradient */}
+      {/* Minimalist Gradient Background */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-secondary via-[#2a2a2a] to-primary/20"></div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
@@ -21,16 +23,18 @@ export const CTA: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="#contato"
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-primary hover:bg-orange-600 text-white px-10 py-5 rounded font-bold text-xl shadow-2xl transition-all transform hover:scale-105"
             >
-              Solicitar Orçamento Técnico →
+              Orçamento via WhatsApp
             </a>
             <a
-              href="tel:11999999999"
+              href="tel:5511996809510"
               className="inline-block bg-white hover:bg-gray-100 text-secondary px-10 py-5 rounded font-bold text-xl shadow-2xl transition-all transform hover:scale-105"
             >
-              Ligar Agora
+              Ligar (11) 99680-9510
             </a>
           </div>
         </FadeIn>

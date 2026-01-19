@@ -9,7 +9,7 @@ import { WorkModes } from './components/WorkModes';
 import { Testimonials } from './components/Testimonials';
 import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
-import { ContactForm } from './components/islands/ContactForm';
+import { MessageCircle, Phone, MapPin, Mail } from 'lucide-react';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -24,6 +24,8 @@ const App: React.FC = () => {
       }
     }
   }, []);
+
+  const whatsappLink = "https://wa.me/5511996809510?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20minha%20obra.";
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -57,31 +59,66 @@ const App: React.FC = () => {
 
         {/* Contato Section */}
         <section id="contato" className="scroll-mt-16 md:scroll-mt-24">
-          <div className="bg-secondary py-20 px-4">
-            <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-              <div className="text-white">
-                <h2 className="text-4xl font-display font-bold mb-6 text-primary">
-                  Solicite um Orçamento Técnico
-                </h2>
-                <p className="text-lg text-gray-300 mb-8">
-                  Estamos prontos para analisar seu projeto e entregar a melhor solução em terraplanagem e locação.
-                </p>
-                <ul className="space-y-4">
-                  <li className="flex items-center gap-3">
-                    <span className="w-6 h-6 bg-primary text-white flex items-center justify-center rounded-full text-xs">✓</span>
-                    Atendimento em São Paulo e Região
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-6 h-6 bg-primary text-white flex items-center justify-center rounded-full text-xs">✓</span>
-                    Consultoria especializada inclusa
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-6 h-6 bg-primary text-white flex items-center justify-center rounded-full text-xs">✓</span>
-                    Frota 100% revisada
-                  </li>
-                </ul>
+          <div className="bg-secondary py-24 px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-4xl font-display font-bold mb-6 text-primary">
+                Fale com Nossos Especialistas
+              </h2>
+              <p className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
+                Estamos prontos para analisar seu projeto e entregar a melhor solução em terraplanagem e locação. Entre em contato direto pelo WhatsApp ou telefone.
+              </p>
+
+              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/10 shadow-2xl">
+                <div className="grid md:grid-cols-2 gap-10">
+                  <div className="space-y-8 text-left">
+                     <div className="flex items-start gap-4">
+                        <div className="bg-primary/20 p-3 rounded-full text-primary">
+                          <Phone size={24} />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-bold text-lg">Telefone / WhatsApp</h4>
+                          <p className="text-gray-400 text-lg font-medium">+55 11 99680-9510</p>
+                        </div>
+                     </div>
+                     
+                     <div className="flex items-start gap-4">
+                        <div className="bg-primary/20 p-3 rounded-full text-primary">
+                          <Mail size={24} />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-bold text-lg">E-mail</h4>
+                          <p className="text-gray-400">contato@saovitorlocacoes.com.br</p>
+                        </div>
+                     </div>
+
+                     <div className="flex items-start gap-4">
+                        <div className="bg-primary/20 p-3 rounded-full text-primary">
+                          <MapPin size={24} />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-bold text-lg">Atendimento</h4>
+                          <p className="text-gray-400">São Paulo e Região Metropolitana</p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div className="flex flex-col justify-center items-center space-y-6 border-t md:border-t-0 md:border-l border-gray-700 pt-8 md:pt-0 md:pl-8">
+                    <a 
+                      href={whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all transform hover:scale-105 flex items-center justify-center gap-3"
+                    >
+                      <MessageCircle size={24} />
+                      Chamar no WhatsApp
+                    </a>
+                    <p className="text-gray-500 text-sm">
+                      Atendimento rápido em horário comercial.<br/>
+                      Segunda a Sexta das 07:00 às 18:00
+                    </p>
+                  </div>
+                </div>
               </div>
-              <ContactForm />
             </div>
           </div>
         </section>

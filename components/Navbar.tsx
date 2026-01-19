@@ -15,27 +15,34 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Serviços', href: '#servicos' },
-    { name: 'Sobre Nós', href: '#sobre' },
-    { name: 'Frota', href: '#frota' },
-    { name: 'Contato', href: '#contato' },
+    { name: 'Home', id: 'home' },
+    { name: 'Serviços', id: 'servicos' },
+    { name: 'Sobre Nós', id: 'sobre' },
+    { name: 'Frota', id: 'frota' },
+    { name: 'Contato', id: 'contato' },
   ];
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const whatsappLink = "https://wa.me/5511996809510?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento.";
+
+  const handleLinkClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     
-    if (href === '#home') {
-      // Refresh na LP conforme solicitado: volta ao topo e limpa a URL
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setTimeout(() => {
-        window.location.hash = '';
-      }, 500);
+    if (id === 'home') {
+      // Força o redirecionamento para a raiz, causando um refresh natural
+      window.location.href = '/';
     } else {
-      const targetId = href.replace('#', '');
-      const elem = document.getElementById(targetId);
+      const elem = document.getElementById(id);
       if (elem) {
-        elem.scrollIntoView({ behavior: 'smooth' });
+        const offset = 80;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elemRect = elem.getBoundingClientRect().top;
+        const elemPosition = elemRect - bodyRect;
+        const offsetPosition = elemPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       }
     }
     
@@ -46,41 +53,40 @@ export const Navbar: React.FC = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary py-3 shadow-lg' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <a 
-            href="#home" 
-            onClick={(e) => handleLinkClick(e, '#home')} 
-            className="flex items-center gap-2 group cursor-pointer"
+          <button 
+            onClick={(e) => handleLinkClick(e, 'home')} 
+            className="flex items-center gap-2 group cursor-pointer border-none bg-transparent"
           >
             <Hammer className="text-primary h-8 w-8 transition-transform group-hover:rotate-12" />
             <span className="text-white font-display font-extrabold text-xl tracking-tight">
               SÃO VITOR <span className="text-primary">LOCAÇÕES</span>
             </span>
-          </a>
+          </button>
 
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-white hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider cursor-pointer"
+              <button
+                key={link.id}
+                onClick={(e) => handleLinkClick(e, link.id)}
+                className="text-white hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider cursor-pointer border-none bg-transparent"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
             <a
-              href="#contato"
-              onClick={(e) => handleLinkClick(e, '#contato')}
-              className="bg-primary hover:bg-orange-600 text-white px-6 py-2 rounded-md font-bold transition-all transform hover:scale-105 cursor-pointer"
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary hover:bg-orange-600 text-white px-6 py-2 rounded-md font-bold transition-all transform hover:scale-105 cursor-pointer border-none flex items-center"
             >
-              ORÇAMENTO
+              WHATSAPP
             </a>
           </div>
 
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-primary focus:outline-none transition-colors"
+              className="text-white hover:text-primary focus:outline-none transition-colors bg-transparent border-none"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -97,22 +103,22 @@ export const Navbar: React.FC = () => {
       >
         <div className="px-4 pt-4 pb-8 space-y-1">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              className="block text-white hover:text-primary hover:bg-gray-800 px-4 py-4 font-medium border-b border-gray-700 last:border-none transition-colors cursor-pointer"
+            <button
+              key={link.id}
+              onClick={(e) => handleLinkClick(e, link.id)}
+              className="block w-full text-left text-white hover:text-primary hover:bg-gray-800 px-4 py-4 font-medium border-b border-gray-700 last:border-none transition-colors cursor-pointer bg-transparent"
             >
               {link.name}
-            </a>
+            </button>
           ))}
           <div className="px-4 pt-6">
             <a
-              href="#contato"
-              onClick={(e) => handleLinkClick(e, '#contato')}
-              className="block w-full text-center bg-primary text-white py-4 rounded-md font-bold shadow-lg active:scale-95 transition-transform cursor-pointer"
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-center bg-[#25D366] text-white py-4 rounded-md font-bold shadow-lg active:scale-95 transition-transform cursor-pointer border-none"
             >
-              SOLICITAR ORÇAMENTO
+              FALAR NO WHATSAPP
             </a>
           </div>
         </div>
